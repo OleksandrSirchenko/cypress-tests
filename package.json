@@ -1,0 +1,23 @@
+{
+  "name": "cypress-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cypress": "^4.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OleksandrSirchenko/cypress-tests.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OleksandrSirchenko/cypress-tests/issues"
+  },
+  "homepage": "https://github.com/OleksandrSirchenko/cypress-tests#readme"
+}
