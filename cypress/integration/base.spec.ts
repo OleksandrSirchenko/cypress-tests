@@ -1,13 +1,14 @@
+const url =
+
 describe('Base Suite', () => {
-    it('should register new user', () => {
-        
+    beforeEach(() => {
+        const url = Cypress.config('baseUrl');
     });
 
-    it('should login with existing user', () => {
-
+    afterEach(() => {
     });
 
-    it('should login with not exsisting user', () => {
+    it('should work', () => {
 
     });
 });

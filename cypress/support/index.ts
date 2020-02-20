@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
-import { commands } from './commands';
+import './commands';
 
-Cypress.Commands.add('createNewUser', commands.createNewUser);
+Cypress.Commands.add('dataCy', (value) => {
+    return cy.get(`[data-cy=${value}]`)
+})
