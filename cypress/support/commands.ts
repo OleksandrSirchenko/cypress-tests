@@ -1,27 +1,27 @@
-declare namespace Cypress {
-    interface Chainable {
-        login: typeof commands.login;
-        logout: typeof commands.logout;
+export class Commands {
+    user: any
+    constructor(user: any) {
+
+    }
+
+    private elements: any = {
+        loginButton: `a[href$='login']`,
+        loginField: `input[name$="username"]`,
+        pswrdField: `input[name$="password"]`,
+        submitButton: `input[name$="submit"]`,
+        logoutButton: `a[href$='logout']`,
+    }
+
+    public login() {
+        cy.get(this.elements.loginButton).click()
+            .get(this.elements.loginField).type(this.user.email)
+            .get(this.elements.pswrdField).type(this.user.pswrd)
+            .get(this.elements.submitButton);
+            return this;
+    }
+
+    public logout() {
+        cy.get(this.elements.logoutButton).click();
+        return this;
     }
 }
-
-const elements = {
-    loginButton: `a[href$='login']`,
-    loginField: `input[name$="username"]`,
-    pswrdField: `input[name$="password"]`,
-    logoutButton: `a[href$='logout']`,
-};
-
-export const commands = {
-    login: (user: any) => {
-        return cy.get(elements.loginButton).click()
-            .get(elements.loginField).type(user.name)
-            .get(elements.pswrdField).type(user.pswrd);
-    },
-    logout: () => {
-        return cy.get(elements.logoutButton).click();
-    }
-};
-
-Cypress.Commands.add('login', commands.login);
-Cypress.Commands.add('login', commands.logout);
