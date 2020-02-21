@@ -1,4 +1,5 @@
 {
+  "baseUrl": "https://dash.readme.io/to/k6",
   "name": "test user",
   "email": "cypress@gmail.com",
   "pswrd": "testUser"

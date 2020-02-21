@@ -1,20 +1,11 @@
-import { Commands } from '../support/commands';
-
-describe('Base Suite', () => {
+describe(`Base Suite`, () => {
     beforeEach(() => {
-        const user: any = cy.fixture('user');
-        console.log(cy.fixture('user.json'));
-        const client = new Commands(user);
-        cy.visit('https://diib.com/')
-            .log(user);
-        client.login()
-            .logout();
+        cy.fixture('config').then(() => {
+            cy.login();
+        });
     });
 
-    afterEach(() => {
-    });
-
-    it('should work', () => {
-
+    it(`should work`, () => {
+        
     });
 });
