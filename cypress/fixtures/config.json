@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://dash.readme.io/to/k6",
+  "baseUrl": "https://insights.hotjar.com",
   "name": "test user",
   "email": "cypress@gmail.com",
   "pswrd": "testUser"
