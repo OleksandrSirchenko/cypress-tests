@@ -1,20 +1,34 @@
-describe(`Base Suite`, () => {
-    let userData: any;
+import { BaseElements as element } from '../support/elements';
 
-    beforeEach(() => {
-        cy.fixture('config').then(user => {
-            userData = user;
-            cy.visit(`${user.baseUrl}/login`).login(user);
-        });
-    });
+describe(`Base Suite`, () => {
+    let data: any;
 
     it(`should verify dashboard url`, () => {
+        const dashboard = `/sites/${data.dashBoardId}/dashboard`;
+
         cy.url().then(url => {
-            expect(url).to.equal(`${userData.baseUrl}/sites/${userId}/dashboard`);
+            expect(url).to.contain(dashboard);
         });
     });
 
     it(`should verify user organization data`, () => {
-        
+        cy.get(element.siteBar).then(el => {
+            expect(el).to.contain(data.company.name);
+            expect(el).to.contain(data.company.url);
+        });
+    });
+
+    before(() => {
+        cy.fixture('config').then(config => {
+            data = config;
+        });
+    });
+
+    beforeEach(() => {
+        cy.visit(`/login`).login(data.user)
+            .waitForRecourcesLoad()
+            .getDashboardId().then(id => {
+                data.dashBoardId = id;
+        });
     });
 });

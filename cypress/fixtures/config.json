@@ -1,6 +1,11 @@
 {
-  "baseUrl": "https://insights.hotjar.com",
-  "name": "test user",
-  "email": "cypress@gmail.com",
-  "pswrd": "testUser"
+  "user": {
+    "name": "test user",
+    "email": "cypress@gmail.com",
+    "pswrd": "testUser"
+  },
+  "company": {
+    "name": "Test company",
+    "url": " https://cypress.io"
+  }
 }
