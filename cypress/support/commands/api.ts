@@ -62,8 +62,6 @@ class ApiCalls {
             recordType: Constants.RECORD_TYPE.HEAT_MAP
         }
 
-        let ids = new Array();
-
         return cy.request({
             url: `/api/v2/sites/${options.dashBoardId}/heatmaps${qs}`,
             headers: {
@@ -72,7 +70,9 @@ class ApiCalls {
         }).its('body').then(heatMaps => {
             heatMaps = heatMaps.data;
 
-            Cypress._.each(heatMaps, data => ids.push(data.id));
+            const ids = _.chain(heatMaps)
+                .flatMap('id')
+                .value();
 
             return Object.assign(heatMap, { ids: ids });
         });
@@ -83,15 +83,15 @@ class ApiCalls {
             recordType: Constants.RECORD_TYPE.FUNNEL
         }
 
-        let ids = new Array();
-
         return cy.request({
             url: `/api/v1/sites/${options.dashBoardId}/${funnel.recordType}`,
             headers: {
                 accept: 'application/json'
             }
         }).its('body').then(funnels => {
-            Cypress._.each(funnels, funnel => ids.push(funnel.id));
+            const ids = _.chain(funnels)
+                .flatMap('id')
+                .value();
 
             return Object.assign(funnel, { ids: ids });
         });
