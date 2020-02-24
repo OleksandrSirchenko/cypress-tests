@@ -11,13 +11,13 @@ declare global {
 
 class Commands {
     public auth(user: any) {
-        if (!user.email || !user.pswrd) {
+        if (!user.email) {
             throw new Error(`Missed required option for user login`);
         }
 
         return cy.log('Logging in...')
             .get(element.email).type(user.email)
-            .get(element.pswrd).type(user.pswrd)
+            .get(element.pswrd).type(Cypress.env('PSWRD'))
             .then(() => {
                 cy.get(element.submitButton).click();
             });

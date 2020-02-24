@@ -1,8 +1,7 @@
 {
   "user": {
     "name": "test user",
-    "email": "cypress@gmail.com",
-    "pswrd": "testUser"
+    "email": "cypress@gmail.com"
   },
   "company": {
     "name": "Test company",

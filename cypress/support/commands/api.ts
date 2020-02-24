@@ -60,7 +60,7 @@ class ApiCalls {
         const qs = '?fields=id,name,created_epoch_time,enabled,visit_count,targeting,screenshots_done,screenshots_failed,screenshots_status,completed,shared,public_url,description,created_by_user&filter_join_operator=or&sort=-id&amount=100&offset=0&count=true&unfiltered_count=true&filter=name__ct__,targeting_rules.pattern__ct__';
         const heatMap = {
             recordType: Constants.RECORD_TYPE.HEAT_MAP
-        }
+        };
 
         return cy.request({
             url: `/api/v2/sites/${options.dashBoardId}/heatmaps${qs}`,
@@ -68,12 +68,8 @@ class ApiCalls {
                 accept: 'application/json'
             }
         }).its('body').then(heatMaps => {
+            const ids = _.chain(heatMaps).flatMap('id').value();
             heatMaps = heatMaps.data;
-
-            const ids = _.chain(heatMaps)
-                .flatMap('id')
-                .value();
-
             return Object.assign(heatMap, { ids: ids });
         });
     }
@@ -81,7 +77,7 @@ class ApiCalls {
     public getFunnelsIds(options: ObjectLike) {
         const funnel = {
             recordType: Constants.RECORD_TYPE.FUNNEL
-        }
+        };
 
         return cy.request({
             url: `/api/v1/sites/${options.dashBoardId}/${funnel.recordType}`,
@@ -89,10 +85,7 @@ class ApiCalls {
                 accept: 'application/json'
             }
         }).its('body').then(funnels => {
-            const ids = _.chain(funnels)
-                .flatMap('id')
-                .value();
-
+            const ids = _.chain(funnels).flatMap('id').value();
             return Object.assign(funnel, { ids: ids });
         });
     }
