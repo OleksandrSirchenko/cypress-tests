@@ -1,18 +1,21 @@
 import { Constants } from '../constants';
 import * as _ from 'lodash';
 
+type ObjectLike = Cypress.ObjectLike;
+
 declare global {
     namespace Cypress {
         interface Chainable {
             deleteRecord: typeof api.deleteRecord;
             getDashboardId: typeof api.getDashboardId;
             getHeatMapsIds: typeof api.getHeatMapsIds;
+            getFunnelsIds: typeof api.getFunnelsIds;
         }
     }
 }
 
 class ApiCalls {
-    public deleteRecord(options: any) {
+    public deleteRecord(options: ObjectLike) {
         const record = _.find(options, 'recordType');
 
         if (_.isEmpty(record.ids)) {
@@ -53,7 +56,7 @@ class ApiCalls {
         });
     }
 
-    public getHeatMapsIds(options: any) {
+    public getHeatMapsIds(options: ObjectLike) {
         const qs = '?fields=id,name,created_epoch_time,enabled,visit_count,targeting,screenshots_done,screenshots_failed,screenshots_status,completed,shared,public_url,description,created_by_user&filter_join_operator=or&sort=-id&amount=100&offset=0&count=true&unfiltered_count=true&filter=name__ct__,targeting_rules.pattern__ct__';
         const heatMap = {
             recordType: Constants.RECORD_TYPE.HEAT_MAP
@@ -75,7 +78,7 @@ class ApiCalls {
         });
     }
 
-    public getFunnelsIds(options: any) {
+    public getFunnelsIds(options: ObjectLike) {
         const funnel = {
             recordType: Constants.RECORD_TYPE.FUNNEL
         }
@@ -100,3 +103,4 @@ const api = new ApiCalls();
 Cypress.Commands.add('deleteRecord', api.deleteRecord);
 Cypress.Commands.add('getDashboardId', api.getDashboardId);
 Cypress.Commands.add('getHeatMapsIds', api.getHeatMapsIds);
+Cypress.Commands.add('getFunnelsIds', api.getFunnelsIds);

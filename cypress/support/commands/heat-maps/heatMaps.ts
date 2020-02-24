@@ -1,5 +1,7 @@
 import { HeatMapElements as element } from './elements';
 
+type ObjectLike = Cypress.ObjectLike;
+
 declare global {
     namespace Cypress {
         interface Chainable {
@@ -15,15 +17,15 @@ class HeatMap {
             .eq(1).click();
     }
 
-    public createNewHeatMap(options: any) {
-        if (!options.name || !options.url) {
+    public createNewHeatMap(options: ObjectLike) {
+        if (!options.name || !options.urls) {
             throw new Error(`Missed required option for create heat map`);
         }
 
         return cy.get(element.newHeatMap).click()
             .get(element.nameField).type(options.name)
             .get(element.badgeCircle).eq(2).click()
-            .get(element.pathUrl).type(options.url)
+            .get(element.pathUrl).type(options.urls)
             .get(element.badgeCircle).eq(3).click()
             .get(element.createHeatMap).click();
     }

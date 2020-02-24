@@ -3,21 +3,21 @@ import { RecordBuilder } from '../fixtures/recordBuilder';
 import { Constants } from '../support/constants';
 
 describe(`Heat Maps`, () => {
-    const heatMapType = Constants.RECORD_TYPE.HEAT_MAP
+    const heatMapType = Constants.RECORD_TYPE.HEAT_MAP;
     let data: any;
 
     it(`should create new heat map`, () => {
         const heatMap = new RecordBuilder(heatMapType)
-            .setMapName('New Heat Map')
-            .setUrl('http://localhost:8080');
+            .setName('New Heat Map')
+            .setUrls('http://localhost:8080');
 
         cy.openHeatMaps()
             .createNewHeatMap(heatMap)
-            .get(element.iconMore).then(element => {
+            .get(element.iconMore).then((element: JQuery<HTMLElement>) => {
                 expect(element).to.be.visible;
             })
-            .get(element.heatMapsTable).then(element => {
-                expect(element).to.contain(heatMap.url)
+            .get(element.heatMapsTable).then((element: JQuery<HTMLElement>) => {
+                expect(element).to.contain(heatMap.urls)
                     .and.to.contain(heatMap.name);
             });
     });
@@ -29,7 +29,7 @@ describe(`Heat Maps`, () => {
     });
 
     beforeEach(() => {
-        cy.visit(`/login`).login(data.user)
+        cy.visit(`/login`).auth(data.user)
             .waitForRecourcesLoad()
             .getDashboardId().then(id => {
                 data.dashBoardId = id;

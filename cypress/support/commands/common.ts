@@ -3,15 +3,14 @@ import { BaseElements as element } from '../elements';
 declare global {
     namespace Cypress {
         interface Chainable {
-            login: typeof commands.login;
-            logout: typeof commands.logout;
+            auth: typeof commands.auth;
             waitForRecourcesLoad: typeof commands.waitForRecourcesLoad;
         }
     }
 }
 
 class Commands {
-    public login(user: any) {
+    public auth(user: any) {
         if (!user.email || !user.pswrd) {
             throw new Error(`Missed required option for user login`);
         }
@@ -24,19 +23,14 @@ class Commands {
             });
     }
 
-    public logout() {
-        return cy;
-    }
-
     public waitForRecourcesLoad() {
         return cy.server()
             .route('**/resources').as('resources')
-            .wait('@resources');
+            .wait('@resources', { timeout: 20000 });
     }
 }
 
 const commands = new Commands();
 
-Cypress.Commands.add('login', commands.login);
-Cypress.Commands.add('logout', commands.logout);
+Cypress.Commands.add('auth', commands.auth);
 Cypress.Commands.add('waitForRecourcesLoad', commands.waitForRecourcesLoad);

@@ -6,15 +6,15 @@ describe(`Base Suite`, () => {
     it(`should verify dashboard url`, () => {
         const dashboard = `/sites/${data.dashBoardId}/dashboard`;
 
-        cy.url().then(url => {
+        cy.url().then((url: string) => {
             expect(url).to.contain(dashboard);
         });
     });
 
     it(`should verify user organization data`, () => {
-        cy.get(element.siteBar).then(el => {
-            expect(el).to.contain(data.company.name);
-            expect(el).to.contain(data.company.url);
+        cy.get(element.siteBar).then((element: JQuery<HTMLElement>) => {
+            expect(element).to.contain(data.company.name);
+            expect(element).to.contain(data.company.url);
         });
     });
 
@@ -25,7 +25,7 @@ describe(`Base Suite`, () => {
     });
 
     beforeEach(() => {
-        cy.visit(`/login`).login(data.user)
+        cy.visit(`/login`).auth(data.user)
             .waitForRecourcesLoad()
             .getDashboardId().then(id => {
                 data.dashBoardId = id;

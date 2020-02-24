@@ -5,11 +5,15 @@ export class RecordBuilder {
         this.recordType = recordType;
     }
 
-    setMapName(name: string) {
+    setName(name: string) {
         return Object.assign(this, { name: name });
     }
 
-    setUrl(url: string) {
-        return Object.assign(this, { url: url });
+    setUrls(urls: any) {
+        return Object.assign(this, { urls: urls });
+    }
+
+    setStepNames(stepNames: any) {
+        return Object.assign(this, { stepNames: stepNames });
     }
 }
