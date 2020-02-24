@@ -6,4 +6,5 @@ export class BaseElements {
     static badgeCircle = '.badge-circle';
     static iconMore = '.icon-more';
     static forms = '.icon-forms';
+    static feedbackBar = 'div[class$="feedback_minimized_label"]';
 }

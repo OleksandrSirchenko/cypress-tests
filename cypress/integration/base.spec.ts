@@ -1,4 +1,5 @@
 import { BaseElements as element } from '../support/elements';
+import { Constants } from '../support/constants';
 
 describe(`Base Suite`, () => {
     let data: any;
@@ -16,6 +17,14 @@ describe(`Base Suite`, () => {
             expect(element).to.contain(data.company.name);
             expect(element).to.contain(data.company.url);
         });
+    });
+
+    it(`should verify the feedback bar displaying on the dashboard`, () => {
+        cy.reload().get(element.feedbackBar)
+            .then((element: JQuery<HTMLElement>) => {
+                expect(element).to.be.visible;
+                expect(element.text().trim()).to.equal(Constants.FEEDBACK);
+            });
     });
 
     before(() => {
