@@ -2,9 +2,11 @@ import { FunnelsElements as element } from '../support/commands/funnels/elements
 import { RecordBuilder } from '../fixtures/recordBuilder';
 import { Constants } from '../support/constants';
 
+type ObjectLike = Cypress.ObjectLike;
+
 describe(`Funnels`, () => {
     const funnelType = Constants.RECORD_TYPE.FUNNEL;
-    let data: any;
+    let data: ObjectLike;
 
     it(`should create new funnel`, () => {
         const funnel = new RecordBuilder(funnelType)

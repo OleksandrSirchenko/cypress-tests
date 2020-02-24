@@ -2,9 +2,11 @@ import { HeatMapElements as element } from '../support/commands/heat-maps/elemen
 import { RecordBuilder } from '../fixtures/recordBuilder';
 import { Constants } from '../support/constants';
 
+type ObjectLike = Cypress.ObjectLike;
+
 describe(`Heat Maps`, () => {
     const heatMapType = Constants.RECORD_TYPE.HEAT_MAP;
-    let data: any;
+    let data: ObjectLike;
 
     it(`should create new heat map`, () => {
         const heatMap = new RecordBuilder(heatMapType)

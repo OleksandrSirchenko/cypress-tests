@@ -1,8 +1,10 @@
 import { BaseElements as element } from '../support/elements';
 import { Constants } from '../support/constants';
 
+type ObjectLike = Cypress.ObjectLike;
+
 describe(`Base Suite`, () => {
-    let data: any;
+    let data: ObjectLike;
 
     it(`should verify dashboard url`, () => {
         const dashboard = `/sites/${data.dashBoardId}/dashboard`;
